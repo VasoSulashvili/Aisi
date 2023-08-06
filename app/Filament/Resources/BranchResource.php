@@ -21,12 +21,17 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\ImageColumn;
 
 class BranchResource extends Resource
 {
     protected static ?string $model = Branch::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-office-building';
+
+    protected static ?string $navigationGroup = 'Business Model';
 
     public static function form(Form $form): Form
     {
@@ -38,10 +43,18 @@ class BranchResource extends Resource
                         ->tabs([
                             Tabs\Tab::make('General')
                                 ->schema([
+                                    FileUpload::make('image')
+                                        ->image()
+                                        ->imageResizeMode('cover')
+                                        ->imageCropAspectRatio('1:1')
+                                        ->imageResizeTargetWidth('500')
+                                        ->imageResizeTargetHeight('500')
+                                        ->label('Image'),
+
                                     TextInput::make('name')
                                         ->required()
                                         ->label('Name'),
-                                        
+
                                     TextInput::make('address')
                                         ->required()
                                         ->label('Address'),
@@ -63,9 +76,17 @@ class BranchResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                ImageColumn::make('image')
+                    ->label('Image'),
+                
+                TextColumn::make('name')
+                    ->label('Name'),
 
-                TextColumn::make('address'),
+                TextColumn::make('address')
+                    ->label('Address'),
+
+                CheckboxColumn::make('active')
+                    ->label('Active'),
             ])
             ->filters([
                 //

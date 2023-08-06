@@ -20,12 +20,17 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class DancerResource extends Resource
 {
     protected static ?string $model = Dancer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
+
+    protected static ?string $navigationGroup = 'Business Model';
 
     public static function form(Form $form): Form
     {
@@ -78,7 +83,26 @@ class DancerResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('image')
+                    ->label('Image'),
+
+                TextColumn::make('name')
+                    ->label('Name'),
+
+                TextColumn::make('surname')
+                    ->label('Surname'),
+
+                TextColumn::make('birth_date')
+                    ->label('Birth Date'),
+                
+                TextColumn::make('group.name')
+                    ->label('Group'),
+
+                TextColumn::make('branch.name')
+                    ->label('Branch'),
+                
+                CheckboxColumn::make('active')
+                    ->label('Active'),
             ])
             ->filters([
                 //

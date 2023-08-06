@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Dancer extends Model
 {
@@ -16,5 +17,18 @@ class Dancer extends Model
     public function group() : BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    
+    public function branch() : HasOneThrough
+    {
+        return $this->hasOneThrough(
+            Branch::class, 
+            Group::class, 
+            'id', 
+            'id', 
+            'group_id', 
+            'branch_id'
+        );
     }
 }

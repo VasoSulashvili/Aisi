@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('event_types', function (Blueprint $table) {
             $table->id();
-            $table->string('image')->nullable();
-            $table->unsignedBigInteger('branch_id');
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->json('schedule')->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
-
-            $table->foreign('branch_id')->references('id')->on('branches');
         });
     }
 
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('event_types');
     }
 };

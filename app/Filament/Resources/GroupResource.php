@@ -23,12 +23,17 @@ use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\RichEditor;
 
 class GroupResource extends Resource
 {
     protected static ?string $model = Group::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    protected static ?string $navigationGroup = 'Business Model';
 
     public static function form(Form $form): Form
     {
@@ -40,6 +45,14 @@ class GroupResource extends Resource
                         ->tabs([
                             Tabs\Tab::make('General')
                                 ->schema([
+                                    FileUpload::make('image')
+                                        ->image()
+                                        ->imageResizeMode('cover')
+                                        ->imageCropAspectRatio('1:1')
+                                        ->imageResizeTargetWidth('500')
+                                        ->imageResizeTargetHeight('500')
+                                        ->label('Image'),
+
                                     Select::make('branch_id')
                                         ->relationship('branch', 'name')
                                         ->label('Branch'),
@@ -48,7 +61,7 @@ class GroupResource extends Resource
                                         ->required()
                                         ->label('Name'),
 
-                                    TextInput::make('description')
+                                    RichEditor::make('description')
                                         ->label('Description'),
                                                                                     
                                     Checkbox::make('active')
@@ -88,6 +101,9 @@ class GroupResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('image')
+                    ->label('Image'),
+                    
                 TextColumn::make('name')
                     ->label('Name'),
 
