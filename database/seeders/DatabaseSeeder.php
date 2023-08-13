@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call(DancerSeeder::class);
 
+        $this->call(AlbumSeeder::class);
+
         $this->call(EventTypeSeeder::class);
 
         $this->call(EventSeeder::class);
-
-        $this->call(AlbumSeeder::class);
 
         // $this->call(GallerySeeder::class);
 

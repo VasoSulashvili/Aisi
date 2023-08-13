@@ -12,6 +12,13 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Tables\Columns\TextColumn;
 
 class EventTypeResource extends Resource
 {
@@ -25,7 +32,23 @@ class EventTypeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Card::make()
+                ->schema([
+                    Tabs::make('Heading')
+                        ->tabs([
+                            Tabs\Tab::make('General')
+                                ->schema([
+                                    TextInput::make('name')
+                                        ->required()
+                                        ->label('Name'),                                   
+                                    
+                                    Checkbox::make('active')
+                                        ->label('Active'),
+                                ]),
+
+
+                        ])
+                ])
             ]);
     }
 
@@ -33,7 +56,14 @@ class EventTypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id')
+                    ->label('ID'),
+                
+                TextColumn::make('name')
+                    ->label('Name'),
+
+                CheckboxColumn::make('active')
+                    ->label('Active'),
             ])
             ->filters([
                 //

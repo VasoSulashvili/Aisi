@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Album;
 use App\Models\EventType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
@@ -18,13 +19,14 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
-        $eventTypes = EventType::all()->pluck('id')->toArray();
 
-        $id = Arr::random($eventTypes);
+        $eventTypeId = Arr::random(EventType::all()->pluck('id')->toArray());
 
-        // dd($id);
+        $albumId = Arr::random(Album::all()->pluck('id')->toArray());
+
         return [
-            'event_type_id' => $id,
+            'event_type_id' => $eventTypeId,
+            'album_id' => $albumId,
             'image' => fake()->image(storage_path('app/public'), 640, 480, null, false),
             'name' => fake()->word(),
             'date' => fake()->date(),

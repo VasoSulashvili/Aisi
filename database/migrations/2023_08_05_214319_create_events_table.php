@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_type_id');
+            $table->unsignedBigInteger('album_id');
             $table->string('image');
             $table->string('name');
             $table->longText('description');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('event_type_id')->references('id')->on('event_types');
+            $table->foreign('album_id')->references('id')->on('albums');
         });
     }
 
