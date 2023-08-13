@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\Pages;
 use App\Filament\Resources\GalleryResource\RelationManagers;
+use App\Models\Dancer;
 use App\Models\Gallery;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -62,11 +63,26 @@ class GalleryResource extends Resource
                                         ->label('Title'),
                                         
                                     TextInput::make('description')
-                                        ->required()
                                         ->label('Description'),                                    
                                     
                                     Checkbox::make('active')
                                         ->label('Active'),
+                                ]),
+                                Tabs\Tab::make('Relations')
+                                ->schema([
+                                    
+                                    Select::make('groups')
+                                        ->relationship('groups', 'name')
+                                        ->multiple()
+                                        ->label('Group'),
+
+                                    Select::make('dancers')
+                                        ->relationship('dancers', 'surname')
+                                        ->multiple()
+                                        ->getOptionLabelFromRecordUsing(fn (Dancer $record) => "{$record->full_name_group_name}")
+                                        ->label('Dancer'),
+
+                                    
                                 ]),
 
                         ])
@@ -80,8 +96,6 @@ class GalleryResource extends Resource
             ->columns([
                 ImageColumn::make('image')
                     ->label('Image'),
-                    TextColumn::make('image_path')
-                    ->label('ID'),
 
                 TextColumn::make('id')
                     ->label('ID'),
@@ -90,7 +104,10 @@ class GalleryResource extends Resource
                     ->label('Title'),
 
                 TextColumn::make('album.title')
-                    ->label('Album')
+                    ->label('Album'),
+
+                CheckboxColumn::make('active')
+                    ->label('Active'),
             ])
             ->filters([
                 //
