@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(EventSeeder::class);
 
+        $this->call(AlbumSeeder::class);
+
+        // $this->call(GallerySeeder::class);
+
     }
 }
