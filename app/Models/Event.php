@@ -10,7 +10,7 @@ class Event extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['event_type_id', 'album_id', 'image', 'name', 'date', 'description',  'active'];
+    protected $fillable = ['event_type_id', 'album_id', 'image', 'name', 'date', 'description', 'address',  'active'];
 
     /**
      * Relationships

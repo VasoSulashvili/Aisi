@@ -16,9 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('event_type_id');
             $table->unsignedBigInteger('album_id');
             $table->string('image');
-            $table->string('name');
-            $table->longText('description');
-            $table->dateTime('date');
+            $table->string('name')->nullable();
+            $table->longText('description')->nullable();
+            $table->dateTime('date')->nullable();
+            $table->string('address')->nullable();
             $table->boolean('active')->default(0);
             $table->timestamps();
 

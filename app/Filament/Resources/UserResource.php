@@ -13,9 +13,14 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\TextColumn;
 
 class UserResource extends Resource
@@ -36,24 +41,59 @@ class UserResource extends Resource
                             ->tabs([
                                 Tabs\Tab::make('General')
                                     ->schema([
+
                                         TextInput::make('name')
                                             ->label('Name'),
+
                                         TextInput::make('email')
                                             ->email()
                                             ->label('Email'),
+
                                         TextInput::make('password')
                                             ->password()
                                             ->label('Password'),
+
                                         TextInput::make('password_confirmation')
                                             ->password()
-                                            ->label('Password Confirm')
+                                            ->label('Password Confirm'),
+
+                                        Checkbox::make('active')
+                                            ->label('Active')
+                                    ]),
+                                Tabs\Tab::make('Profile')
+                                    ->schema([
+                                        Fieldset::make('profile')
+                                        ->columns(1)
+                                            ->relationship('profile')
+                                            ->schema([
+
+                                                FileUpload::make('image')
+                                                    ->image()
+                                                    ->imageResizeMode('cover')
+                                                    ->imageCropAspectRatio('1:1')
+                                                    ->imageResizeTargetWidth('600')
+                                                    ->imageResizeTargetHeight('600')
+                                                    ->label('Image'),
+    
+                                                TextInput::make('name')
+                                                    ->label('Name'),
+        
+                                                TextInput::make('surname')
+                                                    ->label('Surname'),
+        
+                                                RichEditor::make('biography')
+                                                    ->label('Biography')
+                                                ])
+                                        
                                     ]),
                                 Tabs\Tab::make('Roles')
                                     ->schema([
+
                                         Select::make('roles')
                                             ->multiple()
                                             ->relationship('roles', 'name')
                                             ->label('Role')
+
                                     ]),
                             ])
                     ])
@@ -65,8 +105,20 @@ class UserResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
+
                 TextColumn::make('email'),
-                TextColumn::make('roles.name')
+
+                TextColumn::make('profile.name')
+                    ->label('Name'),
+
+                TextColumn::make('profile.surname')
+                    ->label('Surname'),
+
+                TextColumn::make('roles.name'),
+
+                CheckboxColumn::make('active')
+                    ->label('Active'),
+
             ])
             ->filters([
                 //

@@ -67,7 +67,10 @@ class EventResource extends Resource
                                             ->label('Name'),
                                             
                                         TextInput::make('description')
-                                            ->label('Description'),                                    
+                                            ->label('Description'),   
+                                        
+                                        TextInput::make('address')
+                                            ->label('Address'),
                                         
                                         Checkbox::make('active')
                                             ->label('Active'),
