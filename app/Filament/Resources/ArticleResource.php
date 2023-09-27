@@ -73,31 +73,17 @@ class ArticleResource extends Resource
                                             ->label('Active')
 
                                     ]),
-                                Tabs\Tab::make('Schedule')
+                                Tabs\Tab::make('Tags')
                                     ->schema([
                                         
-                                        Repeater::make('schedule')
-                                            ->schema([
-                                                Select::make('day')
-                                                    ->options([
-                                                        'monday' => 'Monday',
-                                                        'tuesday' => 'Tuesdaty',
-                                                        'wednesday' => 'Wednesday',
-                                                        'thursday' => 'Thursday',
-                                                        'friday' => 'Friday',
-                                                        'suturday' => 'Sutarday',
-                                                        'sunday' => 'Sunday',
-                                                    ])
-                                                    ->label('Week Day'),
+                                        // Repeater::make('tags')
+                                        //     ->schema([
+                                                
+                                        //         TextInput::make('tag')
+                                        //             ->label('Tag')
 
-                                                TimePicker::make('schedule_time_from')
-                                                    ->label('From Time'),
-
-                                                TimePicker::make('schedule_time_to')
-                                                    ->label('To Time'),
-
-                                        ])
-                                        ->columns(3),
+                                        // ])
+                                        // ->columns(1),
                                     ]),
                             ])
                     ])
