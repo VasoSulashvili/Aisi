@@ -32,7 +32,7 @@ class Group extends Model
     protected function schedule(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => (array) json_decode($value),
+            get: fn (string $value) => json_decode($value),
         );
     }
 }

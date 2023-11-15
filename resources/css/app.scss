@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "styles.scss";
+
+@font-face {
+    font-family: "Noto-Sans-Georgian";
+    src: url("../fonts/Noto_Sans_Georgian/NotoSansGeorgian-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Noto-Sans-Georgian";
+    src: url("../fonts/Noto_Sans_Georgian/NotoSansGeorgian-SemiBold.ttf");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Noto-Sans-Georgian";
+    src: url("../fonts/Noto_Sans_Georgian/NotoSansGeorgian-Regular.ttf");
+}
+
+body {
+    background-color: #EEEEEE;
+}

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Branch extends Model
@@ -19,8 +21,16 @@ class Branch extends Model
         return $this->hasMany(Group::class);
     }
 
-    public function branch() : HasOneThrough
+    public function dancers() : HasManyThrough
     {
-        return $this->hasOneThrough(Dancer::class, Group::class);
+        return $this->hasManyThrough(Dancer::class, Group::class);
+    }
+
+    /**
+     * Scopes
+     */
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('active', 1);
     }
 }

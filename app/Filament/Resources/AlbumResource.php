@@ -19,6 +19,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Columns\CheckboxColumn;
+use Filament\Forms\Components\Textarea;
 
 class AlbumResource extends Resource
 {
@@ -45,10 +46,10 @@ class AlbumResource extends Resource
                                     TextInput::make('title')
                                         ->required()
                                         ->label('Title'),
-                                        
-                                    TextInput::make('description')
-                                        ->label('Description'),                                    
-                                    
+
+                                    Textarea::make('description')
+                                        ->label('Description'),
+
                                     Checkbox::make('active')
                                         ->label('Active'),
                                 ]),
@@ -65,7 +66,7 @@ class AlbumResource extends Resource
             ->columns([
                 TextColumn::make('id')
                     ->label('ID'),
-                
+
                 TextColumn::make('title')
                     ->label('Title'),
 
@@ -85,14 +86,14 @@ class AlbumResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -100,5 +101,5 @@ class AlbumResource extends Resource
             'create' => Pages\CreateAlbum::route('/create'),
             'edit' => Pages\EditAlbum::route('/{record}/edit'),
         ];
-    }    
+    }
 }

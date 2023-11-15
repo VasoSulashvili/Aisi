@@ -68,17 +68,17 @@ class ArticleResource extends Resource
 
                                         RichEditor::make('body')
                                             ->label('Body'),
-                                                                                        
+
                                         Checkbox::make('active')
                                             ->label('Active')
 
                                     ]),
                                 Tabs\Tab::make('Tags')
                                     ->schema([
-                                        
+
                                         // Repeater::make('tags')
                                         //     ->schema([
-                                                
+
                                         //         TextInput::make('tag')
                                         //             ->label('Tag')
 
@@ -94,9 +94,17 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                
+                ImageColumn::make('image')
+                    ->label('Image'),
+
+                TextColumn::make('title')
+                    ->label('Title'),
+
+                TextColumn::make('url')
+                    ->label('URL'),
+
                 CheckboxColumn::make('active')
-                ->label('Active'),
+                    ->label('Active'),
             ])
             ->filters([
                 //
@@ -108,14 +116,14 @@ class ArticleResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -123,5 +131,5 @@ class ArticleResource extends Resource
             'create' => Pages\CreateArticle::route('/create'),
             'edit' => Pages\EditArticle::route('/{record}/edit'),
         ];
-    }    
+    }
 }
